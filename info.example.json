@@ -1,0 +1,14 @@
+# Config db and server connection then save as ne file called info.json 
+{
+    "db": {
+        "host": "localhost",
+        "user": "root",
+        "password": "root",
+        "database": "music_app",
+        "port": 8889
+    },
+    "server": {
+        "port": 8765
+    }
+  }
+  
