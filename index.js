@@ -21,7 +21,7 @@ const port = info.server.port;
  *  App Configuration
  */
 
-var con = mysql.createConnection({
+var con = mysql.createPool({
   host: info.db.host,
   user: info.db.user,
   password: info.db.password,
