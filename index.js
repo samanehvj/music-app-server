@@ -28,7 +28,7 @@ var con = mysql.createPool({
   database: info.db.database
   // port: info.db.port
 })
-con.connect();
+// con.connect();
 
 /**
  * Routes Definitions
