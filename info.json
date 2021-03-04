@@ -1,0 +1,12 @@
+{
+    "db": {
+        "host": "us-cdbr-east-03.cleardb.com",
+        "user": "b4ade0ec59d292",
+        "password": "b0f0d452",
+        "database": "heroku_bc3c816e4d04ca3"
+    },
+    "server": {
+        "port": 8765
+    }
+  }
+  
