@@ -7,7 +7,7 @@ const path = require("path");
 var mysql = require('mysql')
 const info = require('./info.json');
 const { query } = require("express");
-
+let songsQueue = [];
 
 /**
  * App Variables
@@ -50,7 +50,46 @@ app.get("/", (req, res) => {
  * Server Activation
  */
 
+const http = require('http').Server(app);
+const io = require('socket.io')(http,{
+  cors: {
+    origin: "http://localhost:3001",
+    methods: ["GET", "POST"]
+  }
+});
+
+io.on("connection", function(socket){
+  socket.on('songLiked', async (id) => {
+    
+   await songsQueue.map(song=>{
+      if(song.songId == id){
+        song.likeCount = song.likeCount+1;
+      }
+      return song;
+    });
+    io.emit("likeCount", songsQueue);
+
+  });
+});
+
+
+
+loadSongIdsInSongsQueue = ()=>{
+  //write this function quickly
+  const queryString = `SELECT id FROM songs`; 
+  con.query(queryString, (err, rows, fiels) => {
+    rows.forEach(row=>{
+      songsQueue.push({songId:row.id, likeCount:0});
+    }); 
+
+  });
+ 
+
+  // songsQueue
+}
  const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
+http.listen(PORT, () => {
+  loadSongIdsInSongsQueue();
+
     console.log(`Listening to requests on http://localhost:${PORT}`);
   });
