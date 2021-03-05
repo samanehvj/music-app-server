@@ -54,7 +54,8 @@ const http = require('http').Server(app);
 const io = require('socket.io')(http,{
   cors: {
     // origin: "http://localhost:3001",
-    origin: "https://music-app-ui.herokuapp.com/",
+    // origin: "https://music-app-ui.herokuapp.com/",
+    origin: "*",
     methods: ["GET", "POST"]
   }
 });
