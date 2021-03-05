@@ -59,6 +59,10 @@ const io = require('socket.io')(http,{
 });
 
 io.on("connection", function(socket){
+  //this is when a new user comes in
+  socket.on('getInitialData',  (data) => {
+  io.emit("likeCount", songsQueue);
+  });
   socket.on('songLiked', async (id) => {
     
    await songsQueue.map(song=>{
@@ -75,7 +79,6 @@ io.on("connection", function(socket){
 
 
 loadSongIdsInSongsQueue = ()=>{
-  //write this function quickly
   const queryString = `SELECT id FROM songs`; 
   con.query(queryString, (err, rows, fiels) => {
     rows.forEach(row=>{
